@@ -8,5 +8,23 @@ services:
       - target: 80
         published: 8080
         protocol: tcp
+    volumes:
+      - '.:/app'
+    depends_on: 
+      - 'redis'
+    environment: 
+      APP: 'flask'
+    env_file:
+      - '.env'
+      # - '.env.test' # Anything in .env.test file would override the value in .env file
   redis:
-    image: redis
+    image: redis:3.2-alpine
+    ports:
+      - target: 6379
+        published: 6379
+        protocol: tcp
+    volumes:
+      - 'redis:/data'
+
+volumes:
+  redis: {}

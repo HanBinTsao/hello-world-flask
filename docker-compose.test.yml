@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile.test
     depends_on :
       - app
+    env_file:
+      - '.env'
+      - '.env.test' # Anything in .env.test file would override the value in .env file
 
   app:
     build: ./app
